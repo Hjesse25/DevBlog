@@ -1,7 +1,7 @@
 GET http://localhost:5101/blogs
 
 ###
-GET http://localhost:5101/blogs/4
+GET http://localhost:5101/blogs/1
 
 ###
 POST http://localhost:5101/blogs
@@ -13,3 +13,21 @@ Content-Type: application/json
     "category": "Gaming",
     "tags": ["Nintendo", "Mario"]
 }
+
+###
+PUT http://localhost:5101/blogs/1
+Content-Type: application/json
+
+{
+    "id": 1,
+    "title": "My First Blog Post",
+    "content": "I updated the content of my first post.",
+    "category": "Technology",
+    "tags": [
+      "Tech",
+      "Programming"
+    ]
+}
+
+### 
+DELETE http://localhost:5101/blogs/1
