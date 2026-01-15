@@ -1,7 +1,7 @@
 GET http://localhost:5101/blogs
 
 ###
-GET http://localhost:5101/blogs/1
+GET http://localhost:5101/blogs/5
 
 ###
 POST http://localhost:5101/blogs

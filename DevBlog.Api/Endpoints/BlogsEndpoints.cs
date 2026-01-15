@@ -34,11 +34,18 @@ public static class BlogsEndpoints
     {
         var group = app.MapGroup("/blogs");
 
+        // GET /blogs
         group.MapGet("/", () => blogs);
 
-        group.MapGet("/{id}", (int id) => blogs.Find(blog => blog.Id == id))
-            .WithName(GetBlogEndpointName);
+        // GET /blogs/1
+        group.MapGet("/{id}", (int id) =>
+        {
+            var blog = blogs.Find(blog => blog.Id == id);
 
+            return blog is null ? Results.NotFound() : Results.Ok(blog);
+        }).WithName(GetBlogEndpointName);
+
+        // POST /blogs
         group.MapPost("/", (CreateBlogDto newBlog) =>
         {
             BlogDto blog = new(
@@ -54,6 +61,7 @@ public static class BlogsEndpoints
             return Results.CreatedAtRoute(GetBlogEndpointName, new { id = blog.Id }, blog);
         });
 
+        // PUT /blogs/1
         group.MapPut("/{id}", (int id, UpdateBlogDto updatedBlog) =>
         {
             var index = blogs.FindIndex(blog => blog.Id == id);
@@ -74,6 +82,7 @@ public static class BlogsEndpoints
             return Results.NoContent();
         });
 
+        // DELETE /blogs/1
         group.MapDelete("/{id}", (int id) =>
         {
             blogs.RemoveAll(blog => blog.Id == id);

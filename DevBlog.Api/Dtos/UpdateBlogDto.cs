@@ -1,8 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace DevBlog.Api.Dtos;
 
 public record UpdateBlogDto(
-    string Title,
-    string Content,
-    string Category,
+    [Required][StringLength(50)] string Title,
+    [Required] string Content,
+    [Required][StringLength(20)] string Category,
     string[] Tags
 );
